@@ -32,8 +32,10 @@ export class UsersController {
   findUser(@Param() id: string) {}
   @Get('')
   findUserByEmail(@Query('email') email: string) {}
-  @Patch()
-  updateUser(@Body() body: UpdateUserDto) {}
+  @Patch('/:id')
+  updateUser(@Body() body: UpdateUserDto, @Param('id') id: string) {
+    this.authService.update(Number(id), body);
+  }
   @Patch('/update-password')
   updateUserPassword(@Body() body: UpdateUserPasswordDto) {}
   @Delete('/:id')
